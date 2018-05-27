@@ -151,6 +151,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 imageClick = 0;
                 checkSequence(imageView, myImageView);
+                checkIt();
             }else {
                 imageClick = 0;
             }
@@ -553,7 +554,7 @@ public class MainActivity extends AppCompatActivity {
 
                         if (j==1){
                             cc(imageViews.get(index3));
-                        } else {
+                        } else{
                             cc(imageViews.get(index2));
                         }
                     }
@@ -561,7 +562,11 @@ public class MainActivity extends AppCompatActivity {
                     for (int j=1; j<=3; j++){
 
                         if (j==1){
-                            changeColor(imageViews.get(index1), imageViews.get(index1-27));
+                            if (i==1){
+                                cc(imageViews.get(index1));
+                            }else {
+                                changeColor(imageViews.get(index1), imageViews.get(index1-27));
+                            }
                         }else if (j==2){
                             changeColor(imageViews.get(index2), imageViews.get(index2-27));
                         }else {
@@ -570,9 +575,14 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
 
-                index1 = index1 - 27;
-                index2 = index2 - 27;
-                index3 = index3 - 27;
+                if (i==0){
+                    index1 = index1 - 27;
+                    index2 = index2 - 27;
+                    index3 = index3 -27;
+                }else if (i==1){
+                    index3 = index3 - 27;
+                    index2 = index2 - 27;
+                }
                 i++;
             }
         } else if (index1 >= 36 && index1 <= 44){
@@ -582,30 +592,36 @@ public class MainActivity extends AppCompatActivity {
 
                 if (i==2){
 
-                    for (int j=1;j<=2;j++){
-
-                        if (j==1){
-                            cc(imageViews.get(index3));
-                        } else {
-                            cc(imageViews.get(index2));
-                        }
-                    }
+                    cc(imageViews.get(index3));
                 }else {
-                    for (int j=1; j<=3; j++){
+
+                    for (int j=1; j<=3;j++){
 
                         if (j==1){
-                            changeColor(imageViews.get(index1), imageViews.get(index1-27));
+                            if (i==1){
+                                cc(imageViews.get(index1));
+                            }else {
+                                changeColor(imageViews.get(index1), imageViews.get(index1-27));
+                            }
                         }else if (j==2){
-                            changeColor(imageViews.get(index2), imageViews.get(index2-27));
+                            if (i==1){
+                                cc(imageViews.get(index2));
+                            }else {
+                                changeColor(imageViews.get(index2), imageViews.get(index2-27));
+                            }
                         }else {
-                            changeColor(imageViews.get(index3), imageViews.get(index3 - 27));
+                            changeColor(imageViews.get(index3), imageViews.get(index3-27));
                         }
                     }
                 }
 
-                index1 = index1 - 27;
-                index2 = index2 - 27;
-                index3 = index3 - 27;
+                if (i==0){
+                    index1 = index1 - 27;
+                    index2 = index2 - 27;
+                    index3 = index3 -27;
+                }else if (i==1){
+                    index3 = index3 - 27;
+                }
                 i++;
             }
         } else if (index1 >= 27 && index1 <=35){
