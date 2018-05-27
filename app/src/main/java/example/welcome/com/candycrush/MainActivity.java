@@ -33,7 +33,6 @@ public class MainActivity extends AppCompatActivity {
         number.add(4);
         number.add(5);
         number.add(6);
-        imageClick = 0;
 
         for (int i=1; i<82;i++){
 
@@ -47,33 +46,7 @@ public class MainActivity extends AppCompatActivity {
             img.setOnClickListener(imageListner);
         }
 
-        for (int i=0;i<imageViews.size();i++){
-
-            Collections.shuffle(number);
-            ImageView imageView = imageViews.get(i);
-            if (number.get(0) == 1){
-                imageView.setImageResource(R.drawable.blue);
-                imageView.setTag(1);
-            }else if(number.get(0) == 2){
-                imageView.setImageResource(R.drawable.green);
-                imageView.setTag(2);
-            }else if(number.get(0) == 3){
-                imageView.setImageResource(R.drawable.orange);
-                imageView.setTag(3);
-            }else if(number.get(0) == 4){
-                imageView.setImageResource(R.drawable.purple);
-                imageView.setTag(4);
-            }else if(number.get(0) == 5){
-                imageView.setImageResource(R.drawable.red);
-                imageView.setTag(5);
-            }else if(number.get(0) == 6){
-                imageView.setImageResource(R.drawable.yellow);
-                imageView.setTag(6);
-            }
-        }
-
-        imageClick = 0;
-
+        refresh();
     }
 
     public void onClickImage(ImageView imageView){
@@ -357,22 +330,25 @@ public class MainActivity extends AppCompatActivity {
                 oneImage = imageViews.get(index1+9);
                 twoImage = imageViews.get(index1+18);
                 if (imageView1.getTag().equals(oneImage.getTag()) && imageView1.getTag().equals(twoImage.getTag())){
-                    changeImage(imageView1, oneImage, twoImage, imageView1.getTag());
+                    //changeImage(imageView1, oneImage, twoImage, imageView1.getTag());
+                    exchangeImageOfVertical(imageView1, oneImage, twoImage);
                 }
             }
             if (index1 >=9 && index1 <=71){
                 oneImage = imageViews.get(index1-9);
                 twoImage = imageViews.get(index1+9);
                 if (imageView1.getTag().equals(oneImage.getTag()) && imageView1.getTag().equals(twoImage.getTag())){
-                    changeImage(oneImage, imageView1, twoImage, imageView1.getTag());
+                    //changeImage(oneImage, imageView1, twoImage, imageView1.getTag());
+                    exchangeImageOfVertical(oneImage, imageView1, twoImage);
                 }
             }
             if (index1 >=18 && index1 <= 80){
 
-                oneImage = imageViews.get(index1-9);
-                twoImage = imageViews.get(index1-18);
+                oneImage = imageViews.get(index1-18);
+                twoImage = imageViews.get(index1-9);
                 if (imageView1.getTag().equals(oneImage.getTag()) && imageView1.getTag().equals(twoImage.getTag())){
-                    changeImage(oneImage, twoImage, imageView1, imageView1.getTag());
+                    //changeImage(oneImage, twoImage, imageView1, imageView1.getTag());
+                    exchangeImageOfVertical(oneImage, twoImage, imageView1);
                 }
             }
         }catch (Exception e){
@@ -393,22 +369,25 @@ public class MainActivity extends AppCompatActivity {
                 oneImage = imageViews.get(index2+9);
                 twoImage = imageViews.get(index2+18);
                 if (imageView2.getTag().equals(oneImage.getTag()) && imageView2.getTag().equals(twoImage.getTag())){
-                    changeImage(imageView2, oneImage, twoImage, imageView2.getTag());
+                    //changeImage(imageView2, oneImage, twoImage, imageView2.getTag());
+                    exchangeImageOfVertical(imageView2, oneImage, twoImage);
                 }
             }
             if (index2 >=9 && index2 <=71){
                 oneImage = imageViews.get(index2-9);
                 twoImage = imageViews.get(index2+9);
                 if (imageView2.getTag().equals(oneImage.getTag()) && imageView2.getTag().equals(twoImage.getTag())){
-                    changeImage(oneImage, imageView2, twoImage, imageView2.getTag());
+                    //changeImage(oneImage, imageView2, twoImage, imageView2.getTag());
+                    exchangeImageOfVertical(oneImage, imageView2, twoImage);
                 }
             }
             if (index2 >=18 && index2 <= 80){
 
-                oneImage = imageViews.get(index2-9);
-                twoImage = imageViews.get(index2-18);
+                oneImage = imageViews.get(index2-18);
+                twoImage = imageViews.get(index2-9);
                 if (imageView2.getTag().equals(oneImage.getTag()) && imageView2.getTag().equals(twoImage.getTag())){
-                    changeImage(oneImage, twoImage, imageView2, imageView2.getTag());
+                    //changeImage(oneImage, twoImage, imageView2, imageView2.getTag());
+                    exchangeImageOfVertical(oneImage, twoImage, imageView2);
                 }
             }
         }catch (Exception e){
@@ -524,7 +503,152 @@ public class MainActivity extends AppCompatActivity {
 
     public void exchangeImageOfVertical(ImageView imageView1, ImageView imageView2, ImageView imageView3){
 
+        int index1 = imageViews.indexOf(imageView1);
+        int index2 = imageViews.indexOf(imageView2);
+        int index3 = imageViews.indexOf(imageView3);
 
+        //lower row
+        if (index1 >=54 && index1 <= 62){
+            int i=0;
+            while (i<=2){
+
+                if (i==2){
+
+                    for (int j=1;j<=3;j++){
+
+                        if (j==1){
+                            cc(imageViews.get(index3));
+                        }else if (j==2){
+                            cc(imageViews.get(index2));
+                        }else {
+                            cc(imageViews.get(index1));
+                        }
+                    }
+                }else {
+                    for (int j=1; j<=3; j++){
+
+                        if (j==1){
+                            changeColor(imageViews.get(index1), imageViews.get(index1-27));
+                        }else if (j==2){
+                            changeColor(imageViews.get(index2), imageViews.get(index2-27));
+                        }else {
+                            changeColor(imageViews.get(index3), imageViews.get(index3 - 27));
+                        }
+                    }
+                }
+
+                index1 = index1 - 27;
+                index2 = index2 - 27;
+                index3 = index3 - 27;
+                i++;
+            }
+        } else if (index1 >= 45 && index1 <= 53){
+
+            int i=0;
+            while (i<=2){
+
+                if (i==2){
+
+                    for (int j=1;j<=2;j++){
+
+                        if (j==1){
+                            cc(imageViews.get(index3));
+                        } else {
+                            cc(imageViews.get(index2));
+                        }
+                    }
+                }else {
+                    for (int j=1; j<=3; j++){
+
+                        if (j==1){
+                            changeColor(imageViews.get(index1), imageViews.get(index1-27));
+                        }else if (j==2){
+                            changeColor(imageViews.get(index2), imageViews.get(index2-27));
+                        }else {
+                            changeColor(imageViews.get(index3), imageViews.get(index3 - 27));
+                        }
+                    }
+                }
+
+                index1 = index1 - 27;
+                index2 = index2 - 27;
+                index3 = index3 - 27;
+                i++;
+            }
+        } else if (index1 >= 36 && index1 <= 44){
+
+            int i=0;
+            while (i<=2){
+
+                if (i==2){
+
+                    for (int j=1;j<=2;j++){
+
+                        if (j==1){
+                            cc(imageViews.get(index3));
+                        } else {
+                            cc(imageViews.get(index2));
+                        }
+                    }
+                }else {
+                    for (int j=1; j<=3; j++){
+
+                        if (j==1){
+                            changeColor(imageViews.get(index1), imageViews.get(index1-27));
+                        }else if (j==2){
+                            changeColor(imageViews.get(index2), imageViews.get(index2-27));
+                        }else {
+                            changeColor(imageViews.get(index3), imageViews.get(index3 - 27));
+                        }
+                    }
+                }
+
+                index1 = index1 - 27;
+                index2 = index2 - 27;
+                index3 = index3 - 27;
+                i++;
+            }
+        } else if (index1 >= 27 && index1 <=35){
+            int i = 0;
+            while (i<=1){
+
+                if (i==1){
+
+                    for (int j=1;j<=3;j++){
+
+                        if (j==1){
+                            cc(imageViews.get(index3));
+                        }else if (j==2){
+                            cc(imageViews.get(index2));
+                        }else {
+                            cc(imageViews.get(index1));
+                        }
+                    }
+                }else {
+
+                    for (int j=1; j<=3; j++){
+
+                        if (j==1){
+                            changeColor(imageViews.get(index1), imageViews.get(index1-27));
+                        }else if (j==2){
+                            changeColor(imageViews.get(index2), imageViews.get(index2-27));
+                        }else {
+                            changeColor(imageViews.get(index3), imageViews.get(index3 - 27));
+                        }
+                    }
+                }
+
+                index1 = index1 - 27;
+                index2 = index2 - 27;
+                index3 = index3 - 27;
+                i++;
+            }
+        }else {
+
+            cc(imageViews.get(index1));
+            cc(imageViews.get(index2));
+            cc(imageViews.get(index3));
+        }
     }
 
     public void changeColor(ImageView imageView, ImageView imageView1){
@@ -577,6 +701,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onRfresh(View view){
+        refresh();
+    }
+
+    public void refresh(){
 
         imageClick = 0;
         for (int i=0;i<81;i++){
@@ -602,6 +730,129 @@ public class MainActivity extends AppCompatActivity {
                 imageView.setImageResource(R.drawable.yellow);
                 imageView.setTag(6);
             }
+        }
+
+        checkIt();
+    }
+
+    public void checkIt(){
+
+        for (int i=0; i<imageViews.size(); i++){
+
+            changeAutomatically(imageViews.get(i));
+        }
+    }
+
+    public void changeAutomatically(ImageView imageView){
+
+        globalNum = 0;
+        //taking index
+        int index1 = imageViews.indexOf(imageView);
+
+        try{
+
+            ImageView oneImage = null;
+            ImageView twoImage = null;
+            ImageView threeImage = null;
+            ImageView fourImage = null;
+
+            if (index1 == 80){
+                threeImage = imageViews.get(index1-1);
+                fourImage = imageViews.get(index1-2);
+            }else if (index1 == 79){
+                oneImage = imageViews.get(index1+1);
+                threeImage = imageViews.get(index1-1);
+                fourImage = imageViews.get(index1-2);
+            }else if (index1 == 0){
+                oneImage = imageViews.get(index1+1);
+                twoImage = imageViews.get(index1+2);
+            }else if (index1 == 1){
+                oneImage = imageViews.get(index1+1);
+                twoImage = imageViews.get(index1+2);
+                threeImage = imageViews.get(index1-1);
+            }else {
+                oneImage = imageViews.get(index1+1);
+                twoImage = imageViews.get(index1+2);
+                threeImage = imageViews.get(index1-1);
+                fourImage = imageViews.get(index1-2);
+            }
+
+            if ((index1 >= 0 && index1 < 7) || (index1 >= 9 && index1 <16) || (index1 >=18 && index1 <25) || (index1 >= 27 && index1 <34)
+                    || (index1 >= 36 && index1 <43) || (index1 >= 45 && index1 <52) || (index1 >= 54 && index1 < 61) ||
+                    (index1 >= 63 && index1 < 70) || (index1 >= 72 && index1 < 79)){
+                //TODO: to check only forward 2 numbers
+                if (imageView.getTag().equals(oneImage.getTag()) && imageView.getTag().equals(twoImage.getTag())){
+                    //changeImage(imageView, oneImage, twoImage, imageView.getTag());
+                    exchangeImageOfHorizontal(imageView, oneImage, twoImage);
+                    globalNum++;
+                }
+
+            }
+            if ((index1 > 0 && index1 <= 7) || (index1 > 9 && index1 <=16) || (index1 >18 && index1 <=25) || (index1 > 27 && index1 <=34)
+                    || (index1 > 36 && index1 <=43) || (index1 > 45 && index1 <=52) || (index1 > 54 && index1 <=61) ||
+                    (index1 > 63 && index1 <= 70) || (index1 > 72 && index1 <= 79)){
+                if (imageView.getTag().equals(oneImage.getTag()) && imageView.getTag().equals(threeImage.getTag())){
+
+                    //changeImage(oneImage, imageView,threeImage, imageView.getTag());
+                    exchangeImageOfHorizontal(oneImage, imageView, threeImage);
+                    globalNum++;
+                }
+                //TODO: to check with middle index
+            }
+            if ((index1 > 1 && index1 <= 8) || (index1 > 10 && index1 <=17) || (index1 >19 && index1 <=26) || (index1 > 28 && index1 <=35)
+                    || (index1 > 37 && index1 <=44) || (index1 > 46 && index1 <=53) || (index1 > 55 && index1 <= 62) ||
+                    (index1 > 64 && index1 <= 71) || (index1 > 73 && index1 <=80)){
+
+                //TODO: to check only backward
+                if (imageView.getTag().equals(threeImage.getTag()) && imageView.getTag().equals(fourImage.getTag())){
+
+                    //changeImage(fourImage, threeImage, imageView, imageView.getTag());
+                    exchangeImageOfHorizontal(fourImage, threeImage, imageView);
+                    globalNum++;
+                }
+            }
+        }catch (Exception e){
+            Toast.makeText(this, "Hmmm that's not fair", Toast.LENGTH_SHORT).show();
+        }
+        globalNum = 0;
+
+        //=============================checking vertical======================================//
+
+        try{
+
+            ImageView oneImage = null;
+            ImageView twoImage = null;
+            ImageView threeImage = null;
+            ImageView fourImage = null;
+
+            //TODO Vertical checking
+            if(index1 >= 0 && index1 <=62){
+                oneImage = imageViews.get(index1+9);
+                twoImage = imageViews.get(index1+18);
+                if (imageView.getTag().equals(oneImage.getTag()) && imageView.getTag().equals(twoImage.getTag())){
+                    //changeImage(imageView, oneImage, twoImage, imageView.getTag());
+                    exchangeImageOfVertical(imageView, oneImage, twoImage);
+                }
+            }
+            if (index1 >=9 && index1 <=71){
+                oneImage = imageViews.get(index1-9);
+                twoImage = imageViews.get(index1+9);
+                if (imageView.getTag().equals(oneImage.getTag()) && imageView.getTag().equals(twoImage.getTag())){
+                    //changeImage(oneImage, imageView, twoImage, imageView.getTag());
+                    exchangeImageOfVertical(oneImage, imageView, twoImage);
+                }
+            }
+            if (index1 >=18 && index1 <= 80){
+
+                oneImage = imageViews.get(index1-18);
+                twoImage = imageViews.get(index1-9);
+                if (imageView.getTag().equals(oneImage.getTag()) && imageView.getTag().equals(twoImage.getTag())){
+                    //changeImage(oneImage, twoImage, imageView, imageView.getTag());
+                    exchangeImageOfVertical(oneImage, twoImage, imageView);
+                }
+            }
+        }catch (Exception e){
+            Toast.makeText(this, "Hmmm that's not fair", Toast.LENGTH_SHORT).show();
         }
     }
 }
