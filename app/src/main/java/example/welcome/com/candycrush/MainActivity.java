@@ -522,6 +522,11 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public void exchangeImageOfVertical(ImageView imageView1, ImageView imageView2, ImageView imageView3){
+
+
+    }
+
     public void changeColor(ImageView imageView, ImageView imageView1){
 
         Object tag = imageView1.getTag();
